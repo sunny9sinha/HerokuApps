@@ -24,9 +24,11 @@ def loadModel():
   model.to(device)
 
   if (device != 'cuda'):
-    model.load_state_dict(torch.load('modelparameters_cpu'))
+    model.classifier[4].load_state_dict(torch.load('modelparameters_layer4_cpu'))
+    model.classifier[6].load_state_dict(torch.load('modelparameters_layer6_cpu'))
   else:
-    model.load_state_dict(torch.load('modelparameters'))
+    model.classifier[4].load_state_dict(torch.load('modelparameters_layer4_Gpu'))
+    model.classifier[6].load_state_dict(torch.load('modelparameters_layer6_Gpu'))
 
   model.eval()
   
